@@ -29,10 +29,11 @@ A Java application that imports animal shelter intake data from a CSV file, vali
 ## Stretch Goals
 
 - Alphabetically sorted species
-- Used `Optional` for unknown ages
+- Used `Optional` for unknown animal ages
 - Included invalid row numbers in the report
 - Timestamped report filenames
 - Support for processing multiple CSV files
+- JSON summary export using Jackson
 
 ## Author
 
