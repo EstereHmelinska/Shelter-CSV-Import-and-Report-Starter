@@ -1,57 +1,67 @@
-# Shelter CSV Import and Report Starter
+# Shelter CSV Import & Report
 
-Starter project for M4 practical task: Collections, Files, and Streams.
+A Java application that imports animal shelter intake data from CSV files, validates the data, stores it using Java collections, performs analytics with Stream API, and generates a detailed report.
 
-## Task
-Build a small Java application that:
-1. Parses and validates shelter intake CSV rows.
-2. Stores valid data in suitable collections.
-3. Uses stream pipelines to compute report metrics.
-4. Exports output/upload-report.txt in the required format.
+---
 
-## What is included
-- Compile-safe project skeleton with TODO markers for Steps 1-4.
-- Sample intake file with 30+ rows, including intentionally invalid rows.
-- Output folder scaffold and optional processed-files registry placeholder.
-- SLF4J logging dependencies.
+## Features
 
-## Project structure
-- src/main/java/lv/bootcamp/shelter/model/Animal.java
-- src/main/java/lv/bootcamp/shelter/service/CsvImportService.java
-- src/main/java/lv/bootcamp/shelter/service/ShelterAnalyticsService.java
-- src/main/java/lv/bootcamp/shelter/service/ReportExportService.java
-- src/main/resources/data/intake.csv
-- output/processed-files.txt
+### CSV Import
+- Reads shelter intake data from CSV files
+- Uses UTF-8 encoding
+- Skips the header row
+- Validates every record before importing
+- Logs invalid rows using SLF4J
 
-## Run commands
-Use Maven wrapper (recommended):
-- Windows: ./mvnw.cmd test
-- Windows: ./mvnw.cmd exec:java
-- macOS/Linux: ./mvnw test
-- macOS/Linux: ./mvnw exec:java
+### Validation
+- Accepts blank ages as unknown (`null`)
+- Rejects non-numeric age values
+- Validates boolean vaccination values
+- Parses dates using `dd.MM.yyyy`
+- Tracks skipped rows and invalid row numbers
 
-## Required behavior checklist
-- Skip malformed rows and log warnings with SLF4J.
-- Accept blank age as unknown.
-- Reject non-numeric age values.
-- Parse date format dd.MM.yyyy.
-- Build collections:
-  - List<Animal> allAnimals
-  - Set<String> uniqueSpecies
-  - Map<String, List<Animal>> animalsBySpecies
-  - List<String> animalsNeedingVetInput
-- Report includes:
-  - total imported and total skipped
-  - unique species list
-  - per-species totals and vaccinated counts
-  - oldest animal per species (excluding unknown ages)
-  - needs-vet-input line in format name(species)
+### Collections
+Uses Java collections to organize imported data:
 
-## Stretch goals
-- Sort report sections alphabetically by species.
-- Use Optional for missing ages.
-- Add JSON summary export.
-- Process multiple CSV files with Files.walk().
-- Write unique timestamped report filenames.
-- Persist processed input filenames and skip duplicates.
-- Include invalid row numbers in report.
+- `List<Animal>` – all imported animals
+- `Set<String>` – unique species
+- `Map<String, List<Animal>>` – animals grouped by species
+- `List<String>` – animals requiring veterinary input
+
+### Stream API Analytics
+Generates statistics using Java Streams:
+
+- Total imported animals
+- Total skipped rows
+- Unique species list
+- Animals grouped by species
+- Vaccinated animals per species
+- Oldest animal per species
+- Animals with unknown age
+
+### Report Export
+Generates a UTF-8 report containing:
+
+- Report generation date
+- Import statistics
+- Invalid row numbers
+- Unique species
+- Per-species summary
+- Vaccination counts
+- Oldest animal per species
+- Animals requiring veterinary input
+
+---
+
+## Stretch Goals Completed
+
+- Alphabetically sorted species
+- Used `Optional` for unknown animal ages
+- Included invalid row numbers in the report
+- Timestamped report filenames
+- Support for processing multiple CSV files
+---
+
+## Author
+
+Created by Estere Hmeļinska
